@@ -6,10 +6,12 @@ import by.itacademy.spring.listener.entity.AccessType;
 import by.itacademy.spring.listener.entity.EntityEvent;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
 @Service
+@Transactional
 public class CompanyService {
     private final CompanyRepository companyRepository;
     private final ApplicationEventPublisher eventPublisher;
