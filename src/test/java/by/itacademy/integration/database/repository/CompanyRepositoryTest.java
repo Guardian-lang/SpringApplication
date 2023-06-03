@@ -12,8 +12,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @IT
 @RequiredArgsConstructor
@@ -23,6 +22,13 @@ class CompanyRepositoryTest {
 //    private final TransactionTemplate transactionTemplate;
     private final CompanyRepository companyRepository;
     private final static Integer APPLE_ID = 5;
+
+    @Test
+    void findByNameTest() {
+        var company = companyRepository.findByName("Google");
+        assertTrue(company.isPresent());
+        company.ifPresent(c -> assertEquals("Google", c.getName()));
+    }
 
     @Test
     void findAllByNameContainingIgnoreCase() {

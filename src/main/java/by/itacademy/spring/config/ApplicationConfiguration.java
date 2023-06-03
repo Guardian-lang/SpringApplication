@@ -20,15 +20,4 @@ public class ApplicationConfiguration {
     public ConnectionPool connectionPool3() {
         return new ConnectionPool("msql", "root", 1, "url");
     }
-
-    @Bean
-    public UserRepository userRepository2(ConnectionPool connectionPool2) {
-        return new UserRepository(connectionPool2);
-    }
-
-    @Bean
-    @Profile("!web")
-    public UserRepository userRepository1() {
-        return new UserRepository(connectionPool3());
-    }
 }
