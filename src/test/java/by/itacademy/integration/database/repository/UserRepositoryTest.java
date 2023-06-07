@@ -3,6 +3,7 @@ package by.itacademy.integration.database.repository;
 import by.itacademy.annotation.IT;
 import by.itacademy.spring.database.entity.Role;
 import by.itacademy.spring.database.repository.UserRepository;
+import by.itacademy.spring.dto.PersonalInfo;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
 import org.springframework.data.domain.PageRequest;
@@ -17,6 +18,12 @@ import static org.junit.jupiter.api.Assertions.*;
 public class UserRepositoryTest {
 
     private final UserRepository userRepository;
+
+    @Test
+    void checkProjections() {
+        var users = userRepository.findAllByCompanyId(1);
+        assertThat(users).hasSize(2);
+    }
 
     @Test
     void findFirst4ByTest() {

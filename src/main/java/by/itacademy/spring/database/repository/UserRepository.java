@@ -3,6 +3,8 @@ package by.itacademy.spring.database.repository;
 import by.itacademy.spring.database.entity.Role;
 import by.itacademy.spring.database.entity.User;
 import by.itacademy.spring.database.pool.ConnectionPool;
+import by.itacademy.spring.dto.IPersonalInfo;
+import by.itacademy.spring.dto.PersonalInfo;
 import lombok.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +21,19 @@ import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
+
+//    List<PersonalInfo> findAllByCompanyId(Integer companyId);
+//    <T> List<T> findAllByCompanyId(Integer companyId, Class<T> clazz);
+
+    @Query(value = "SELECT " +
+            "firstname, " +
+            "lastname, " +
+            "birth_date birthDate " +
+            "FROM users " +
+            "WHERE company_id = :companyId",
+            nativeQuery = true)
+    List<IPersonalInfo> findAllByCompanyId(Integer companyId);
+
 
     //List<User> findFirst4By(Sort sort);
 
