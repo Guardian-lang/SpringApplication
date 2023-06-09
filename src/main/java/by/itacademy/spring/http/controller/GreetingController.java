@@ -42,7 +42,7 @@ public class GreetingController {
                                @CookieValue("JSESSIONID") String jsessionId,
                                @PathVariable("id") Integer id) {
         mv.setViewName("greeting/hello");
-        mv.addObject("user", new UserReadDto(1L, "Andrei"));
+        //mv.addObject("user", new UserReadDto(1L, "Andrei"));
         return mv;
     }
 }
