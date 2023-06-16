@@ -6,12 +6,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @Slf4j
-@ControllerAdvice
+@ControllerAdvice(basePackages = "by.itacademy.spring.http.controller")
 public class ControllerExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public String handleException(Exception exception, HttpServletRequest request) {
         log.error("Failed to return response", exception);
+
         return "error/error500";
     }
 }

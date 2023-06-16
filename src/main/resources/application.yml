@@ -43,5 +43,7 @@ spring:
       show_sql: true
       format_sql: true
       hbm2ddl.auto: validate
-
+app:
+  image:
+    backet: E:\AAA\JavaGuru\JavaEnterprise\Projects\spring-starter-ita\images
 
