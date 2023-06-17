@@ -14,6 +14,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -62,6 +63,8 @@ public interface UserRepository extends JpaRepository<User, Long>,
     List<User> findFirst3By(Sort sort);
 
     Page<User> findAllBy(Pageable pageable);
+
+    Optional<User> findByUsername(String username);
 
 //    int updateRole(Role role, Sort sort, Pageable pageable, Long... ids);
 }
