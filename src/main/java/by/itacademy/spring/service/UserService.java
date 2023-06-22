@@ -62,7 +62,7 @@ public class UserService implements UserDetailsService {
     public UserReadDto create(UserCreateEditDto userDto) {
         return Optional.of(userDto)
                 .map(dto -> {
-                    uploadImage(dto.getImage());
+                    uploadImage(dto.getAvatar());
                     return userCreateEditMapper.map(dto);
                 })
                 .map(userRepository::save)
@@ -88,7 +88,7 @@ public class UserService implements UserDetailsService {
     public Optional<UserReadDto> update(Long id, UserCreateEditDto userDto) {
         return userRepository.findById(id)
                 .map(entity -> {
-                    uploadImage(userDto.getImage());
+                    uploadImage(userDto.getAvatar());
                     return userCreateEditMapper.map(userDto, entity);
                 })
                 .map(userRepository::saveAndFlush)

@@ -13,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Value
 @FieldNameConstants
@@ -33,5 +34,7 @@ public class UserCreateEditDto {
     Role role;
     Integer companyId;
 
-    MultipartFile image;
+    MultipartFile avatar;
+
+    List<MultipartFile> images;
 }

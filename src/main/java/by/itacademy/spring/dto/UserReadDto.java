@@ -1,10 +1,12 @@
 package by.itacademy.spring.dto;
 
 import by.itacademy.spring.database.entity.Company;
+import by.itacademy.spring.database.entity.Image;
 import by.itacademy.spring.database.entity.Role;
 import lombok.Value;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Value
 public class UserReadDto {
@@ -13,7 +15,8 @@ public class UserReadDto {
     LocalDate birthDate;
     String firstname;
     String lastname;
-    String image;
+    String avatar;
     Role role;
     CompanyReadDto company;
+    List<String> images;
 }
