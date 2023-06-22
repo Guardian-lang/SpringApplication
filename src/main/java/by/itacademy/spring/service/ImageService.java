@@ -2,14 +2,14 @@ package by.itacademy.spring.service;
 
 import by.itacademy.spring.database.entity.Image;
 import by.itacademy.spring.database.repository.ImageRepository;
-import by.itacademy.spring.database.repository.UserRepository;
 import by.itacademy.spring.dto.UserReadDto;
 import by.itacademy.spring.mapper.UserReadMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -30,7 +30,7 @@ public class ImageService {
     private final UserReadMapper userReadMapper;
 
 //    @Autowired
-//    public void setBucket(@Value("${app.image.backet}")
+//    public void setBucket(@Value("${app.image.bucket}")
 //                                  String bucket) {
 //        this.bucket = bucket;
 //    }
@@ -57,12 +57,27 @@ public class ImageService {
                 : Optional.empty();
     }
 
-    public List<byte[]> findAllByUser(UserReadDto user) {
+    public List<MultipartFile> findAllByUser(UserReadDto user) {
         List<Image> images = imageRepository.findAllByUser(userReadMapper.mapToUser(user));
-        List<byte[]> out = new ArrayList<>();
+        List<MultipartFile> out = new ArrayList<>();
         for (Image image : images) {
             out.add(image.getImg());
         }
         return out;
+    }
+
+    public List<Image> findAllImagesByUser(UserReadDto user) {
+        return imageRepository.findAllByUser(userReadMapper.mapToUser(user));
+    }
+
+    @Transactional
+    public boolean delete(Long id) {
+        return imageRepository.findById(id)
+                .map(entity -> {
+                    imageRepository.delete(entity);
+                    imageRepository.flush();
+                    return true;
+                })
+                .orElse(false);
     }
 }

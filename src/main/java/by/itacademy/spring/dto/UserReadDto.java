@@ -1,7 +1,5 @@
 package by.itacademy.spring.dto;
 
-import by.itacademy.spring.database.entity.Company;
-import by.itacademy.spring.database.entity.Image;
 import by.itacademy.spring.database.entity.Role;
 import lombok.Value;
 

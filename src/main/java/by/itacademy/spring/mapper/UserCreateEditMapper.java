@@ -38,7 +38,7 @@ public class UserCreateEditMapper implements Mapper<UserCreateEditDto, User> {
         user.setRole(object.getRole());
         user.setCompany(getCompany(object.getCompanyId()));
 
-        Optional.ofNullable(object.getImage())
+        Optional.ofNullable(object.getAvatar())
                 .filter(Predicate.not(MultipartFile::isEmpty))
                 .ifPresent(image -> user.setAvatar(image.getOriginalFilename()));
     }

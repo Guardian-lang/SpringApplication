@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @Data
 @NoArgsConstructor
@@ -22,5 +23,5 @@ public class Image {
     @JoinColumn(name = "user_id")
     private User user;
 
-    private byte[] img;
+    private MultipartFile img;
 }

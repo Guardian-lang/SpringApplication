@@ -1,11 +1,14 @@
 package by.itacademy.spring.mapper;
 
+import by.itacademy.spring.database.entity.Image;
 import by.itacademy.spring.database.entity.User;
 import by.itacademy.spring.dto.CompanyReadDto;
 import by.itacademy.spring.dto.UserReadDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -19,6 +22,10 @@ public class UserReadMapper implements Mapper<User, UserReadDto> {
         CompanyReadDto company = Optional.ofNullable(object.getCompany())
                 .map(companyReadMapper::map)
                 .orElse(null);
+        List<String> images = new ArrayList<>();
+        for (Image image : object.getImages()) {
+            images.add(image.getImg().getOriginalFilename());
+        }
         return new UserReadDto(
                 object.getId(),
                 object.getUsername(),
@@ -27,7 +34,8 @@ public class UserReadMapper implements Mapper<User, UserReadDto> {
                 object.getLastname(),
                 object.getAvatar(),
                 object.getRole(),
-                company
+                company,
+                images
         );
     }
 
@@ -46,7 +54,7 @@ public class UserReadMapper implements Mapper<User, UserReadDto> {
         user.setRole(object.getRole());
         user.setCompany(companyReadMapper.mapToCompany(object.getCompany()));
 
-        Optional.ofNullable(object.getImage())
+        Optional.ofNullable(object.getAvatar())
                 .ifPresent(user::setAvatar);
     }
 }

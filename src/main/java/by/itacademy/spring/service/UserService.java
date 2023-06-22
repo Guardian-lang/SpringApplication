@@ -62,7 +62,7 @@ public class UserService implements UserDetailsService {
     public UserReadDto create(UserCreateEditDto userDto) {
         return Optional.of(userDto)
                 .map(dto -> {
-                    uploadImage(dto.getAvatar());
+                    uploadAvatar(dto.getAvatar());
                     return userCreateEditMapper.map(dto);
                 })
                 .map(userRepository::save)
@@ -71,9 +71,18 @@ public class UserService implements UserDetailsService {
     }
 
     @SneakyThrows
-    private void uploadImage(MultipartFile image) {
-        if(!image.isEmpty()) {
-            imageService.upload(image.getOriginalFilename(), image.getInputStream());
+    private void uploadAvatar(MultipartFile avatar) {
+        if(!avatar.isEmpty()) {
+            imageService.upload(avatar.getOriginalFilename(), avatar.getInputStream());
+        }
+    }
+
+    @SneakyThrows
+    private void uploadImages(List<MultipartFile> images) {
+        for (MultipartFile image : images) {
+            if(!image.isEmpty()) {
+                imageService.upload(image.getOriginalFilename(), image.getInputStream());
+            }
         }
     }
 
@@ -88,7 +97,8 @@ public class UserService implements UserDetailsService {
     public Optional<UserReadDto> update(Long id, UserCreateEditDto userDto) {
         return userRepository.findById(id)
                 .map(entity -> {
-                    uploadImage(userDto.getAvatar());
+                    uploadAvatar(userDto.getAvatar());
+                    uploadImages(userDto.getImages());
                     return userCreateEditMapper.map(userDto, entity);
                 })
                 .map(userRepository::saveAndFlush)

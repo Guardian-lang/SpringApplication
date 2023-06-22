@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 @Component
 @Value
@@ -14,5 +15,5 @@ import org.springframework.stereotype.Component;
 public class ImageGetDto {
     Long id;
     Long userId;
-    byte[] img;
+    MultipartFile img;
 }
