@@ -79,7 +79,7 @@ public class UserService implements UserDetailsService {
 
     public Optional<byte[]> findAvatar(Long id) {
         return userRepository.findById(id)
-                .map(User::getImage)
+                .map(User::getAvatar)
                 .filter(StringUtils::hasText)
                 .flatMap(imageService::get);
     }

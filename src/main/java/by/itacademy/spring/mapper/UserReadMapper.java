@@ -25,9 +25,28 @@ public class UserReadMapper implements Mapper<User, UserReadDto> {
                 object.getBirthDate(),
                 object.getFirstname(),
                 object.getLastname(),
-                object.getImage(),
+                object.getAvatar(),
                 object.getRole(),
                 company
         );
+    }
+
+    public User mapToUser(UserReadDto object) {
+        User user = new User();
+        copy(object, user);
+        return user;
+    }
+
+    private void copy(UserReadDto object, User user) {
+        user.setId(object.getId());
+        user.setUsername(object.getUsername());
+        user.setFirstname(object.getFirstname());
+        user.setLastname(object.getLastname());
+        user.setBirthDate(object.getBirthDate());
+        user.setRole(object.getRole());
+        user.setCompany(companyReadMapper.mapToCompany(object.getCompany()));
+
+        Optional.ofNullable(object.getImage())
+                .ifPresent(user::setAvatar);
     }
 }

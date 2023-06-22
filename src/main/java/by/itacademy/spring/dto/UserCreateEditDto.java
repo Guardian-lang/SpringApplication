@@ -1,6 +1,7 @@
 package by.itacademy.spring.dto;
 
 import by.itacademy.spring.database.entity.Role;
+import by.itacademy.spring.validator.Adult;
 import by.itacademy.spring.validator.UserInfo;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 @Value
 @FieldNameConstants
 @UserInfo
+@Adult
 public class UserCreateEditDto {
     @Email
     String username;

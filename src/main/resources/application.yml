@@ -45,5 +45,5 @@ spring:
       hbm2ddl.auto: validate
 app:
   image:
-    backet: E:\AAA\JavaGuru\JavaEnterprise\Projects\spring-starter-ita\images
+    bucket: C:\Users\Ahmed\IdeaProjects\spring-starter\images
 

@@ -29,7 +29,7 @@ public class User implements BaseEntity<Long> {
 
     private String lastname;
 
-    private String image;
+    private String avatar;
 
     private String password;
 
@@ -43,5 +43,9 @@ public class User implements BaseEntity<Long> {
     @Builder.Default
     @OneToMany(mappedBy = "user")
     private List<UserChat> userChats = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "user")
+    private List<Image> images = new ArrayList<>();
 }
 

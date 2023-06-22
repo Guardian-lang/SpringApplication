@@ -14,4 +14,11 @@ public class CompanyReadMapper implements Mapper<Company, CompanyReadDto>{
                 object.getName()
         );
     }
+
+    public Company mapToCompany(CompanyReadDto object) {
+        return Company.builder()
+                .id(object.id())
+                .name(object.name())
+                .build();
+    }
 }
