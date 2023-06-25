@@ -59,7 +59,7 @@ public class ImageController {
     }
 
     @PostMapping("/{userId}/{imageNo}/delete")
-    public String delete(@PathVariable("userId") Long userId, @PathVariable("imageNo") Integer imageNumber, Model model) {
+    public String delete(@PathVariable("userId") Long userId, @PathVariable("imageNo") Integer imageNumber) {
         List<Image> images = userService.findById(userId)
                 .map(imageService::findAllImagesByUser)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
