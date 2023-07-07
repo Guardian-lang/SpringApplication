@@ -36,15 +36,20 @@ public class ImageService {
 //    }
 
     @SneakyThrows
-    public void upload(String imagePath, InputStream content) {
+    public int upload(String imagePath, InputStream content) {
         Path fullImagePath = Path.of(bucket, imagePath);
+        byte out = 0;
 
         try (content) {
+            var bites = content.readAllBytes();
+            for (byte bite : bites) {
+                out += bite;
+            }
             Files.createDirectories(fullImagePath.getParent());
             Files.write(fullImagePath, content.readAllBytes(),
                     StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
         }
-
+        return out;
     }
 
 
