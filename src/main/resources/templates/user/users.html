@@ -23,6 +23,7 @@
             <input id="size" type="number" name="size" th:value="${users.metadata.size}">
         </label>
     </div>
+    <input type="hidden" th:name="${_csrf}" th:value="${_csrf.token}"/>
     <button type="submit">Filter</button>
 </form>
 <div th:each="user : ${users.content}">
