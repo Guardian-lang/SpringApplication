@@ -20,6 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @IT
 @AutoConfigureMockMvc
 @RequiredArgsConstructor
+@WithMockUser(username = "test@gmail.com", password = "test", authorities = {"ADMIN", "USER"})
 public class UserControllerTest {
     private final MockMvc mockMvc;
 

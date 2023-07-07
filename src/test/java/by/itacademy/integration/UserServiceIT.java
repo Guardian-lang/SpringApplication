@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @IT
 @RequiredArgsConstructor
+@WithMockUser(username = "test@gmail.com", password = "test", authorities = {"ADMIN", "USER"})
 public class UserServiceIT {
 
     private static final Long USER_1 = 1L;
